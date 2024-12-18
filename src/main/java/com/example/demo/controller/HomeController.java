@@ -36,5 +36,7 @@ public class HomeController {
 		model.addAttribute("msg","Saved sucessfully!!");
 		return "redirect:/savedetails";
 	}
+	
+	
 
 }
