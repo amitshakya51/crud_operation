@@ -3,8 +3,10 @@ package com.example.demo.Service;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.UserDetails;
@@ -19,6 +21,9 @@ public class UserServiceImpl implements UserService {
 	public UserDetails saveDetail(UserDetails userDetails){
 		return userRepository.save(userDetails);
 	}
+	
+	@Autowired
+	private JdbcTemplate jdbcTemplate;
 
 	@Override
 	public LinkedList<UserDetails> getusers() {
@@ -28,5 +33,11 @@ public class UserServiceImpl implements UserService {
 		List<UserDetails> llist=userRepository.findAll();
 		System.out.println(alist.toString());
 		return new LinkedList(llist);
+	}
+
+	@Override
+	public List<Map<String, Object>> viewuser() {
+		String sql = "select * from user_details";
+		return jdbcTemplate.queryForList(sql);
 	}
 }

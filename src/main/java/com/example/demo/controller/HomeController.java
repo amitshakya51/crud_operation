@@ -37,6 +37,13 @@ public class HomeController {
 		return "redirect:/savedetails";
 	}
 	
+	@GetMapping("/viewdetails")
+	public String viewDetails(Model model) {
+		List<Map<String, Object>> lists=userService.viewuser();
+		model.addAttribute("userlist",lists);
+		return "viewlist";
+	}
+	
 	
 
 }
